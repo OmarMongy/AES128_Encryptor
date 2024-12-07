@@ -21,8 +21,6 @@
 module MixColumn
 #(parameter WIDTH = 128)
 (
-/*input                  clk_i,
-input                  rst_n_i,*/
 input      [WIDTH-1:0] data_i,
 output     [WIDTH-1:0] data_o
 );
