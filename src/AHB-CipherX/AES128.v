@@ -62,7 +62,7 @@ AES_Round_Orchestrator CTRL(
     .data_final_o(data_o_final)
 );
 
-KeyExpansionFunction_v2 #(WIDTH) KEF (
+KeyExpansionFunction #(WIDTH) KEF (
   .clk_i(clk_i),
   .rst_n_i(rst_n_i),
   .key_ciph_i(key[0]),
