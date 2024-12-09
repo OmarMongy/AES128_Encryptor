@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 `timescale 1ns / 1ps
 
-module tb_top_aes();
+module tb_TOP_AES();
 
     // Testbench signals
     reg        HCLK;
@@ -34,7 +34,7 @@ module tb_top_aes();
     wire        HRESP;
 
     // Instantiate the AES top module
-    aes_core uut (
+    AES_CORE uut (
         .HCLK(HCLK),
         .HRESETn(HRESETn),
         .HSEL(HSEL),
