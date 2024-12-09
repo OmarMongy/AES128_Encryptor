@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module aes_ahb_interface (
+module AES_AHB_INTERFACE (
     input wire        HCLK,           // AHB Clock
     input wire        HRESETn,        // AHB Reset (active low)
     input wire        HSEL,           // AHB Select
