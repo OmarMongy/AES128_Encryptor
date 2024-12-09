@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module aes_core
+module AES_CORE
 #(parameter WIDTH = 128)
  (
     input  wire        HCLK,
@@ -34,7 +34,7 @@ module aes_core
 wire [127:0] aes_key, aes_plaintext, aes_ciphertext;
 wire         aes_start, aes_done;
 
-aes_ahb_interface ahb_interface (
+AES_AHB_INTERFACE ahb_interface (
 .HCLK(HCLK),
 .HRESETn(HRESETn),
 .HSEL(HSEL),
