@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-module AES_AHB_INTERFACE (
+module aes_ahb_interface (
     input wire        HCLK,           // AHB Clock
     input wire        HRESETn,        // AHB Reset (active low)
     input wire        HSEL,           // AHB Select
@@ -33,7 +33,7 @@ module AES_AHB_INTERFACE (
     // Signals to AES Core
     output reg [127:0] aes_key,       // 128-bit Key
     output reg [127:0] aes_plaintext, // 128-bit Plaintext
-    input  wire [127:0] aes_ciphertext,// 128-bit Ciphertext
+    input  wire [127:0]aes_ciphertext,// 128-bit Ciphertext
     output reg         start          // Start Signal to AES Core
 );
     // Address decoding for AES registers
@@ -50,9 +50,12 @@ module AES_AHB_INTERFACE (
     localparam CIPHER1_ADDR = 32'h0028;
     localparam CIPHER2_ADDR = 32'h002C;
     localparam CIPHER3_ADDR = 32'h0030;
+    localparam DONE_STATUS = 32'h0034;
 
     reg [31:0] key_regs[3:0];        // 32-bit key registers
     reg [31:0] plaintext_regs[3:0]; // 32-bit plaintext registers
+    
+    wire [31:0] BASE_ADDR = 32'h4000_0000; // Base Address
 
     // Register read/write logic
     always @(posedge HCLK or negedge HRESETn) begin
@@ -75,7 +78,7 @@ module AES_AHB_INTERFACE (
         end else if (HSEL && HREADY) begin
             if (HWRITE) begin
                 // Write to registers
-                case (HADDR)
+                case (HADDR - BASE_ADDR)                       // 19/12/2024 , I sub. the BASE_ADDR
                     KEY0_ADDR:  key_regs[0] <= HWDATA;
                     KEY1_ADDR:  key_regs[1] <= HWDATA;
                     KEY2_ADDR:  key_regs[2] <= HWDATA;
@@ -89,7 +92,7 @@ module AES_AHB_INTERFACE (
                 endcase
             end else begin
                 // Read from registers
-                case (HADDR)
+                case (HADDR - BASE_ADDR)                       // 19/12/2024 , I sub. the BASE_ADDR
                     KEY0_ADDR:     HRDATA <= key_regs[0];
                     KEY1_ADDR:     HRDATA <= key_regs[1];
                     KEY2_ADDR:     HRDATA <= key_regs[2];
@@ -102,6 +105,7 @@ module AES_AHB_INTERFACE (
                     CIPHER1_ADDR:  HRDATA <= aes_ciphertext[63:32];
                     CIPHER2_ADDR:  HRDATA <= aes_ciphertext[95:64];
                     CIPHER3_ADDR:  HRDATA <= aes_ciphertext[127:96];
+                    DONE_STATUS:   HRDATA <= DONE;
                     default:       HRDATA <= 32'd0;
                 endcase
             end
@@ -118,5 +122,13 @@ module AES_AHB_INTERFACE (
             aes_plaintext <= {plaintext_regs[3], plaintext_regs[2], plaintext_regs[1], plaintext_regs[0]};
         end
     end
+ 
+ /*   // Monitor AES operation completion
+    always @(posedge HCLK or negedge HRESETn) begin
+        if (!HRESETn) begin
+            DONE <= 1'b0;
+        end else if (start) begin
+            DONE <= 1'b1; // Simplified for demonstration
+        end
+    end*/
 endmodule
-
