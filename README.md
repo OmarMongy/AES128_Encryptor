@@ -26,32 +26,12 @@ The project is designed to be integrated into SoCs with an *AHB interface* for s
 - RISC-V compatible environment (for testing and integration with RISC-V based SoCs)
 - Power and area evaluation tools (optional)
 
-## *How to Use*
-
-### *1. Clone the Repository*
-bash
-git clone https://github.com/your-username/repository-name.git
-cd repository-name
-
-
-### *2. Build the Project*
-This project can be synthesized using Vivado or a similar FPGA development tool. Use the following commands to synthesize the hardware:
-bash
-vivado -mode batch -source project.tcl
-
-
-### *3. Integration with SoC*
-- The AES coprocessor can be integrated into your custom SoC using the *AHB interface*. Ensure that the AHB master module can communicate with the AES accelerator and memory-mapped registers are set up correctly.
-- You can connect the AES module to a RISC-V processor or any other controller through the AHB interface.
-
-### *4. Test the AES Accelerator*
-- Test the AES accelerator with various AES-128 encryption tasks.
-- Ensure to monitor the power and area usage to validate the low-power design.
 
 ## *File Structure*
 - *src/*: Contains all the hardware design files for the AES coprocessor, AES Orchestrator module, and AHB interface.
 - *testbench/*: Includes testbench files for simulation and verification of the AES accelerator.
 - *documentation/*: Project documentation files.
+-  *Firm Ware/*: RISC-V32i assembly, Linker script and the machine code.
 - *scripts/*: Vivado or synthesis-related scripts for building the project.
 
 ## *Licensing*
@@ -60,11 +40,10 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## *Acknowledgments*
 
-- Special thanks to *Bassel* for his valuable guidance and support throughout this project.
+- Special thanks to *Bassel Yasser* for his valuable guidance and support throughout this project.
 - Thanks to the open-source RISC-V community and all the contributors who made this project possible.
 
 ## *Contact*
 
 For questions or further collaboration, feel free to reach out at:  
-*Email*: your-email@example.com  
-*LinkedIn*: [Your LinkedIn Profile]
+*Email*: omarmongy68@gamil.com
