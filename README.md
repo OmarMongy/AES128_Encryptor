@@ -29,9 +29,10 @@ The project is designed to be integrated into SoCs with an *AHB interface* for s
 
 ## *File Structure*
 - *src/*: Contains all the hardware design files for the AES coprocessor, AES Orchestrator module, and AHB interface.
-- *testbench/*: Includes testbench files for simulation and verification of the AES accelerator.
-- *documentation/*: Project documentation files.
--  *Firm Ware/*: RISC-V32i assembly, Linker script and the machine code.
+- *sim/*: Includes testbench files for simulation and verification of the AES accelerator.
+- *docs/*: Project documentation files and the references.
+- *Firm Ware/*: RISC-V32i assembly, Linker script and the machine code.
+- *syn_report*/: Some synthesis reports and outputs.
 - *scripts/*: Vivado or synthesis-related scripts for building the project.
 
 ## *Licensing*
